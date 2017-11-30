@@ -6,11 +6,12 @@ import { UserListComponent, UserEditComponent } from './user-list/index';
 // import { UserListComponent } from './user-list/user-list.component';
 // import { UserEditComponent } from './user-list/user-edit/user-edit.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const RoutesConfig: Routes = [
   {
     path: '',
-    component: UserListComponent
+    component: DashboardComponent
   },
   {
     path: 'user',
@@ -21,6 +22,10 @@ const RoutesConfig: Routes = [
         component: UserEditComponent
       }
     ]
+  },
+  {
+    path: 'card',
+    component: UserCardComponent
   },
   {
     path: 'notfound',

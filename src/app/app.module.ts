@@ -11,6 +11,7 @@ import { RestAPI } from './rest-api';
 import { UserEditComponent } from './user-list/user-edit/user-edit.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { AppRoutingModule, RoutesComponents } from './app.routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AppRoutingModule, RoutesComponents } from './app.routing.module';
     UserCardComponent,
     UserEditComponent,
     NotFoundComponent,
-    RoutesComponents
+    RoutesComponents,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
