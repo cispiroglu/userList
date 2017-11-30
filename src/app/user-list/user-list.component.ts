@@ -22,11 +22,7 @@ export class UserListComponent implements OnInit {
     this.users = await this.api.getList();
   }
 
-  editClick() {
-
-  }
-
-  routeMethod() {
-
+  editClick(user) {
+    console.log(user);
   }
 }
