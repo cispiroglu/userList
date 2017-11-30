@@ -9,19 +9,23 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { RestAPI } from './rest-api';
 import { UserEditComponent } from './user-list/user-edit/user-edit.component';
-import { RouterModule } from '@angular/router';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { AppRoutingModule, RoutesComponents } from './app.routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
     UserCardComponent,
-    UserEditComponent
+    UserEditComponent,
+    NotFoundComponent,
+    RoutesComponents
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [RestAPI],
   bootstrap: [AppComponent]
