@@ -9,7 +9,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { RestAPI } from './rest-api';
 import { UserEditComponent } from './user-list/user-edit/user-edit.component';
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -21,8 +21,7 @@ import { UserEditComponent } from './user-list/user-edit/user-edit.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    RouterModule
+    HttpModule
   ],
   providers: [RestAPI],
   bootstrap: [AppComponent]
