@@ -10,22 +10,22 @@ import { Configuration } from './apiConfiguration';
 export class DataService {
 
     private actionUrl: string;
-    public token:string;
-    
-    constructor(private http: HttpClient, private _api: Configuration,private router: Router) {
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    public token: string;
+
+    constructor(private http: HttpClient, private _api: Configuration, private router: Router) {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
-        this.actionUrl = _api.ServerWithApiUrl;
+        // this.actionUrl = _api.ServerWithApiUrl;
     }
 
     public login(username: string, password: string): Observable<boolean> {
-        this._api._method='User_Login';
+        this._api._method = 'User_Login';
         return this.http.post(this.actionUrl, JSON.stringify({ username: username, password: password }))
             .map((response: Response) => {
                 // response içerisinde token varsa login başarılı
-                var responseJson:any = response.json();
-                //let token = response.json() && response.json().token;
-                let token = responseJson && responseJson.token;
+                const responseJson: any = response.json();
+                // let token = response.json() && response.json().token;
+                const token = responseJson && responseJson.token;
                 if (token) {
                     // token değerini setle
                     this.token = token;
@@ -33,7 +33,7 @@ export class DataService {
                     // routing yaparken token kontrolü için response token localStorage ile sakla
                     localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
 
-                    // login başarılı 
+                    // login başarılı
                     return true;
                 } else {
                     // login başarısız
@@ -49,6 +49,7 @@ export class DataService {
     }
 
     public getAll<T>(): Observable<T> {
+        this.actionUrl = this._api._apiUrl + this._api._method;
         return this.http.get<T>(this.actionUrl);
     }
 
@@ -71,7 +72,6 @@ export class DataService {
         return this.http.delete<T>(this.actionUrl + id);
     }
 }
-
 
 @Injectable()
 export class CustomInterceptor implements HttpInterceptor {
