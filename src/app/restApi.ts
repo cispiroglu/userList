@@ -54,7 +54,8 @@ export class DataService {
     }
 
     public getSingle<T>(id: number): Observable<T> {
-        return this.http.get<T>(this.actionUrl + id);
+        this.actionUrl = this._api._apiUrl + this._api._method + '/' + id;
+        return this.http.get<T>(this.actionUrl);
     }
 
     public add<T>(itemName: string): Observable<T> {
