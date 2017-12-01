@@ -52,6 +52,7 @@ export class UserEditComponent implements OnInit {
     error => {
       this._slimLoadingBarService.complete();
       this._toastrService.error('Meeegh', 'Error!');
+      console.log(error);
     },
     () => {
       this._slimLoadingBarService.complete();

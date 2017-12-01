@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'toastr-ng2';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,10 +15,11 @@ import { UserEditComponent } from './user-list/user-edit/user-edit.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { AppRoutingModule, RoutesComponents } from './app.routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DataService } from './restApi';
+import { DataService, CustomInterceptor } from './restApi';
 import { Configuration } from './apiConfiguration';
 import { SlimLoadingBarModule, SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastrService } from 'toastr-ng2/toastr-service';
+import { GuardsComponent } from './guards/guards.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ToastrService } from 'toastr-ng2/toastr-service';
     UserEditComponent,
     NotFoundComponent,
     RoutesComponents,
-    DashboardComponent
+    DashboardComponent,
+    GuardsComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,17 @@ import { ToastrService } from 'toastr-ng2/toastr-service';
     ToastrModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [RestAPI, DataService, Configuration, SlimLoadingBarService],
+  providers: [
+    RestAPI,
+    DataService,
+    Configuration,
+    SlimLoadingBarService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
