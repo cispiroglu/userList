@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, CanActivate } from '@angular/router';
 import { Configuration } from './apiConfiguration';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class DataService {
@@ -18,10 +19,33 @@ export class DataService {
         // this.actionUrl = _api.ServerWithApiUrl;
     }
 
-    public login(username: string, password: string): Observable<boolean> {
-        this._api._method = 'User_Login';
-        return this.http.post(this.actionUrl, JSON.stringify({ username: username, password: password }))
+    public login(username: string, password: string) {
+        // this._api._method = 'User_Login';
+        const tokenUrl = 'http://192.168.10.27:40200/Auth/Auth/Token';
+        // const body = JSON.stringify({
+        //   grant_type: 'password',
+        //   username: username,
+        //   password: password,
+        //   client_id: 'bilisimHR.WebAp'
+        // });
+
+        const headers = new HttpHeaders;
+        if (!headers.has('Content-type')) {
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        }
+
+        const body = 'grant_type=password&username=' + username +
+          '&password=' + password + '&client_id=bilisimHR.WebApp';
+
+        // return this.http.post(tokenUrl, body, { headers: headers });
+
+        return this.http.post(tokenUrl, body,
+          { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
             .map((response: Response) => {
+                // console.log(response);
+                const tokenStr = JSON.stringify(response);
+                console.log(tokenStr);
+                console.log(response);
                 // response içerisinde token varsa login başarılı
                 const responseJson: any = response.json();
                 // let token = response.json() && response.json().token;

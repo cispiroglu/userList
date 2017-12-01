@@ -14,8 +14,8 @@ export class AuthGuard implements CanActivate {
         /*
         burada sadece login olup olmadığımız kontrol ediyoruz.
         Hatalı login girişini localStorage ya da ip bazında db de tutarak
-        ip ban kontrolünü gerçekleştirebilriz. DB de banlı ip bağlandığında burada 
-        kontrol gerçekleştirip kullanıcı logini engelleyebiliriz.
+        ip ban kontrolünü gerçekleştirebilriz. DB de banlı ip bağlandığında
+        burada kontrol gerçekleştirip kullanıcı logini engelleyebiliriz.
         */
 
 

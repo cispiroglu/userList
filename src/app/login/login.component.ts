@@ -5,33 +5,34 @@ import { DataService } from '../restApi';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: []
 })
 export class LoginComponent implements OnInit {
 
-  model:any={};
-  loading =false;
+  model: any = { };
+  loading = false;
   error = '';
 
-  constructor(private router:Router, private _dataService:DataService) { }
+  constructor(private router: Router, private _dataService: DataService) { }
 
   ngOnInit() {
-    // login ekranına girilmiş ise yeni bir login işlemi gerçekleştirilecek. 
-    //bu yüzden öncelikle session temizlenmeli.
+    // login ekranına girilmiş ise yeni bir login işlemi gerçekleştirilecek.
+    // bu yüzden öncelikle session temizlenmeli.
     this._dataService.logout();
   }
 
-  login(){
+  login() {
     this.loading = true;
     this._dataService.login(this.model.username, this.model.password)
-    .subscribe(result=>{
-      if(result == true){
+    .subscribe(result => {
+      console.log(result);
+      if (result === true) {
         this.router.navigate(['/dashboard']);
-      }else{
+      } else {
         this.error = 'Kullanıcı bilgileri hatalı';
         this.loading = false;
       }
-    })
+    });
   }
 
 }

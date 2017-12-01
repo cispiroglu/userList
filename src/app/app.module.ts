@@ -19,7 +19,8 @@ import { DataService, CustomInterceptor } from './restApi';
 import { Configuration } from './apiConfiguration';
 import { SlimLoadingBarModule, SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastrService } from 'toastr-ng2/toastr-service';
-import { GuardsComponent } from './guards/guards.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { GuardsComponent } from './guards/guards.component';
     NotFoundComponent,
     RoutesComponents,
     DashboardComponent,
-    GuardsComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +53,8 @@ import { GuardsComponent } from './guards/guards.component';
       provide: HTTP_INTERCEPTORS,
       useClass: CustomInterceptor,
       multi: true
-    }
+    },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
