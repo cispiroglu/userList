@@ -21,19 +21,12 @@ export class UserEditComponent implements OnInit {
     private _toastrService: ToastrService,
     public configuration: Configuration) {
 
-    const userId: number = Number(this.router.snapshot.params['id']);
-    this.getUserById(userId);
-    // this.user = this.getUserById(userId);
-    // console.log(this.user);
   }
 
   ngOnInit() {
-
+    const userId: number = Number(this.router.snapshot.params['id']);
+    this.getUserById(userId);
   }
-
-  // async callUser(userId: number) {
-  //   return await this.getUserById(userId);
-  // }
 
   getUserById(userId: number) {
     this.configuration._method = 'Users';
