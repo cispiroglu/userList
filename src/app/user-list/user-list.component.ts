@@ -2,31 +2,38 @@ import { Component, OnInit } from '@angular/core';
 import { RestAPI } from '../rest-api';
 import { DataService } from '../restApi';
 import { Configuration } from '../apiConfiguration';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { ToastrService } from 'toastr-ng2';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css'],
-  providers: [RestAPI, DataService, Configuration]
+  styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
   users: any[];
   data: any;
 
-  constructor(public api: RestAPI, public configuration: Configuration, public restApi: DataService) {
+  constructor(public api: RestAPI,
+    public configuration: Configuration,
+    public restApi: DataService,
+    public _slimLoadingBarService: SlimLoadingBarService,
+    private _toastrService: ToastrService) {
 
   }
 
   ngOnInit() {
+    this._slimLoadingBarService.start();
     this.configuration._method = 'Users';
     this.restApi.getAll<any[]>()
-    .subscribe((data) => this.data = data,
+    .subscribe((data) => this.users = data,
     error => {
-        console.log('error');
-      },
+      this._slimLoadingBarService.complete();
+      this._toastrService.error('Meeegh', 'Error!');
+    },
     () => {
-      this.users = this.data;
-      console.log('success');
+      this._slimLoadingBarService.complete();
+      this._toastrService.success('Hallalujahh!!', 'Success!');
     });
     // this.getUserList();
     // console.log('burada');
@@ -48,3 +55,4 @@ export class UserListComponent implements OnInit {
     console.log(user);
   }
 }
+
