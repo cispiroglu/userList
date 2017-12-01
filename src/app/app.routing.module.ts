@@ -9,8 +9,8 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 
-//satfalarda login olunup olunmadığını canActive ile kontrol ediyoruz. Önceden hazırladığımız authGuarda implement ettiğimiz
-//CanActive routing ile guard konuşmasını sağlar.
+// sayfalarda login olunup olunmadığını canActive ile kontrol ediyoruz. Önceden hazırladığımız authGuarda implement ettiğimiz
+// CanActive routing ile guard konuşmasını sağlar.
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -18,7 +18,7 @@ const RoutesConfig: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
   },
   {
     path: 'user',
