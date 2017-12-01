@@ -65,8 +65,10 @@ export class DataService {
     }
 
     public update<T>(id: number, itemToUpdate: any): Observable<T> {
+        this.actionUrl = this._api._apiUrl + this._api._method; // + '/' + id;
+
         return this.http
-            .put<T>(this.actionUrl + id, JSON.stringify(itemToUpdate));
+            .put<T>(this.actionUrl, JSON.stringify(itemToUpdate));
     }
 
     public delete<T>(id: number): Observable<T> {

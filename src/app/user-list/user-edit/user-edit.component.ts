@@ -44,4 +44,18 @@ export class UserEditComponent implements OnInit {
     // return await this.api.getById(userId);
     // console.log(this.user);
   }
+
+  update() {
+    this.configuration._method = 'Users/Put';
+    this.restApi.update<any>(this.user.Id, this.user)
+    .subscribe((data) => this.user = data,
+    error => {
+      this._slimLoadingBarService.complete();
+      this._toastrService.error('Meeegh', 'Error!');
+    },
+    () => {
+      this._slimLoadingBarService.complete();
+      this._toastrService.success('Hallalujahh!!', 'Success!');
+    });
+  }
 }
