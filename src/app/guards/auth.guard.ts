@@ -1,9 +1,25 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { Router, CanActivate } from '@angular/router';
 
-export class GuardsComponent {
+@Injectable()
+export class AuthGuard implements CanActivate {
 
-  constructor() { }
+    constructor(private router: Router) { }
+
+    canActivate() {
+        if (localStorage.getItem('currentUser')) {
+            return true;
+        }
+
+        /*
+        burada sadece login olup olmadığımız kontrol ediyoruz.
+        Hatalı login girişini localStorage ya da ip bazında db de tutarak
+        ip ban kontrolünü gerçekleştirebilriz. DB de banlı ip bağlandığında burada 
+        kontrol gerçekleştirip kullanıcı logini engelleyebiliriz.
+        */
 
 
+        this.router.navigate(['/login']);
+        return false;
+    }
 }
