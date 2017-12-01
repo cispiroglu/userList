@@ -11,17 +11,22 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 const RoutesConfig: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: DashboardComponent
   },
   {
     path: 'user',
-    component: UserListComponent,
-    children: [
-      {
-        path: 'edit',
-        component: UserEditComponent
-      }
-    ]
+    component: UserListComponent
+    // children: [
+    //   {
+    //     path: 'user/edit',
+    //     component: UserEditComponent
+    //   }
+    // ]
+  },
+  {
+    path: 'user/edit/:id',
+    component: UserEditComponent
   },
   {
     path: 'card',
@@ -34,7 +39,7 @@ const RoutesConfig: Routes = [
   // route' ı bulamadığı ne zaman ne yapmalı ve nereye yönlendirmelidiri aşağıdaki biçimde tanımlıyoruz.
   {
     path: '**',
-    redirectTo: '/notfound'
+    redirectTo: 'notfound'
   }
 ];
 

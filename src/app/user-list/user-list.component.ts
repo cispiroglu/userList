@@ -8,7 +8,7 @@ import { RestAPI } from '../rest-api';
   providers: [RestAPI]
 })
 export class UserListComponent implements OnInit {
-  users: any;
+  users: any[];
 
   constructor(public api: RestAPI) {
 
@@ -16,10 +16,17 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.getUserList();
+    console.log('burada');
   }
 
-  async getUserList() {
-    this.users = await this.api.getList();
+  getUserList() {
+    this.api.getListObservable<any[]>().subscribe((data: any[]) => {
+      return this.users = data;
+    },
+    error => { console.log('hata: ' + error); },
+    () => { console.log('başarılı'); });
+
+    // this.users = await this.api.getList();
   }
 
   editClick(user) {

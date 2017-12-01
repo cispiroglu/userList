@@ -1,7 +1,7 @@
 <h1>bilisimHR User</h1>
 <ul class="list-group">
   <li class="list-group-item" style="cursor: pointer" *ngFor="let user of users">
-      <a routerLink='edit' >{{ user.UserName }}</a>
+      <a [routerLink]="['edit', user.Id]" >{{ user.UserName }}</a>
       <button class="btn btn-xs btn-primary pull-right" (click)="editClick(user)">Edit</button>
   </li>
 </ul>
