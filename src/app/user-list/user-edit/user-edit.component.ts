@@ -41,6 +41,7 @@ export class UserEditComponent implements OnInit {
       this._slimLoadingBarService.complete();
       this._toastrService.success('Hallalujahh!!', 'Success!');
     });
+
     // return await this.api.getById(userId);
     // console.log(this.user);
   }
