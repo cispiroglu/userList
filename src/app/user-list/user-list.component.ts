@@ -15,8 +15,8 @@ export class UserListComponent implements OnInit {
   data: any;
 
   constructor(public api: RestAPI,
-    public configuration: Configuration,
-    public restApi: DataService,
+    private configuration: Configuration,
+    private restApi: DataService,
     public _slimLoadingBarService: SlimLoadingBarService,
     private _toastrService: ToastrService) {
 
@@ -25,6 +25,7 @@ export class UserListComponent implements OnInit {
   ngOnInit() {
     this._slimLoadingBarService.start();
     this.configuration._method = 'Users';
+
     this.restApi.getAll<any[]>()
     .subscribe((data) => this.users = data,
     error => {

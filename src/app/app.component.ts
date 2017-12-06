@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from './restApi';
 
 @Component({
   selector: 'app-root',
