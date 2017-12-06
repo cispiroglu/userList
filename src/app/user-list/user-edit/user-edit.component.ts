@@ -19,7 +19,9 @@ export class UserEditComponent implements OnInit {
     private router: ActivatedRoute,
     public _slimLoadingBarService: SlimLoadingBarService,
     private _toastrService: ToastrService,
-    public configuration: Configuration) {  }
+    public configuration: Configuration) {
+
+  }
 
   ngOnInit() {
     const userId: number = Number(this.router.snapshot.params['id']);
